@@ -1,21 +1,24 @@
-//
-//  ContentView.swift
-//  Sample_two
-//
-//  Created by Yashika Kushwaha on 27/08/25.
-//
+
 
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = Users()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+       NavigationStack {
+           VStack {
+               List(viewModel.users) { user in
+                   
+                   NavigationLink(destination: UserDetails(user: user)){
+                       Text(user.name)
+                   }
+               }
+               
+           }
+           .padding()
+           .navigationTitle(Text("Users"))
+           
         }
-        .padding()
     }
 }
 
